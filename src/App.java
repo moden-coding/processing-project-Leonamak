@@ -3,6 +3,7 @@ import processing.core.*;
 public class App extends PApplet {
     boolean BGpress = false;
     int brush = 20;
+    boolean released = true;
 
     public static void main(String[] args) {
         PApplet.main("App");
@@ -143,7 +144,7 @@ public class App extends PApplet {
                 background(0, 0, 0);
                 System.out.println("changed");
             } else if (mouseY < 370 && mouseY > 320) {
-
+                
             } else {
                 mycolor = get(mouseX, mouseY);
                 if (mycolor == -1644826) {
@@ -185,20 +186,33 @@ public class App extends PApplet {
         return BGpress;
     }
 
-    // checks to see if the thickness buttons are pressed.
+    // turns mouse release into a boolean from a void
+    public boolean released() {
+        if (mousePressed) {
+            released = false;
+        } else if (mousePressed != true) {
+            released = true;
+        }
+        return released;
+    }
+
+    // checks to see if the thickness button is pressed.
     public int ThicknessPressed() {
         if (mousePressed) {
             if (mouseX > 880 && mouseX < 965 && mouseY > 320 && mouseY < 370) {
-                if (brush == 50) {
-                    brush = 20;
-                } else {
-                    brush = brush + 10;
+                if (released()) {
+                    if (brush == 500) {
+                        brush = 20;
+                        System.out.println("Brush: " + brush);
+                    } else {
+                        brush += 100;
+                        System.out.println("Brush: " + brush);
+                    }
                 }
             }
         }
         return brush;
     }
-
     // makes the brush actually work only inside the canvas. i used chatGPT to find
     // out what the mouseDragged
     // method was, everything inside was written by me.
@@ -207,8 +221,7 @@ public class App extends PApplet {
         if (mouseX > 115 && mouseX < 890) {
             noStroke();
             fill(mycolor);
-            circle(mouseX, mouseY, );
-            System.out.println(ThicknessPressed());
+            circle(mouseX, mouseY, brush);
             System.out.println("nice");
         }
     }
