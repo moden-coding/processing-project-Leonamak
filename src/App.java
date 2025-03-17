@@ -201,11 +201,11 @@ public class App extends PApplet {
         if (mousePressed) {
             if (mouseX > 880 && mouseX < 965 && mouseY > 320 && mouseY < 370) {
                 if (released()) {
-                    if (brush == 500) {
+                    if (brush == 50) {
                         brush = 20;
                         System.out.println("Brush: " + brush);
                     } else {
-                        brush += 100;
+                        brush += 10;
                         System.out.println("Brush: " + brush);
                     }
                 }
