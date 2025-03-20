@@ -19,7 +19,7 @@ public class App extends PApplet {
 
     // setting the size of the canvas
     public void settings() {
-        size(1000, 1000);
+        size(1000, 850);
     }
 
     // the main setup of my color pallette and buttons.
@@ -135,22 +135,47 @@ public class App extends PApplet {
         fill(200, 200, 200);
         rect(890, 320, 75, 50);
         fill(0, 0, 0);
-        textSize(12);
-        text("Change Brush", 1000 - 107, 350);
+        textSize(16);
+        text("Brush Size", 1000 - 107, 350);
         // opacity change button
         fill(200, 200, 200);
         rect(890, 390, 75, 50);
         fill(0, 0, 0);
         textSize(20);
         text("Opacity", 1000 - 104, 420);
-        //pallete rectangle. only the first loop is written by ChatGPT, the rest i figured out myself.
-        for (int i = 0; i < 50; i++) {
-            float lerpValue = map(i, 0, 50, 0, 1);  // Map the y-position to a color interpolation value
-            stroke(lerpColor(color(red), color(orange), lerpValue));  // Interpolate between red and orange
-            line(890, 460 + i, 890 + 75, 460 + i);  // Draw a line across the rectangle at each y-position
-          }
+        //drawing my pallete! i did use chatgpt to help me figure out each aspect of how you make a gradient,
+        //and the rest i figured out myself. i had the idea to make a method instead of having so many
+        //values just being reused a lot, and it made me understand it easier.
+        drawPalleteWith7Colors(360, 75, 890, 460, red, orange, yellow, green, blue, bluepurple, purple);
     }
-
+    //my method to create the rainbow pallette
+    public void drawPalleteWith7Colors(int height, int width, int startingX, int startingY, int color1, int color2, int color3, int color4, int color5, int color6, int color7) {
+        for (int i =0; i < height/6; i++) {
+            float lerpValue = map(i, 0, height/6, 0, 1);
+            stroke(lerpColor(color1, color2, lerpValue));
+            line(startingX, startingY + i, startingX + width, startingY + i);
+        } for (int i =height/6; i<2*height/6; i++) {
+            float lerpValue = map(i, height/6, 2*height/6, 0, 1);
+            stroke(lerpColor(color2, color3, lerpValue));
+            line(startingX, startingY + i, startingX + width, startingY + i);
+        } for (int i =2*height/6; i<3*height/6; i++) {
+            float lerpValue = map(i, 2*height/6, 3*height/6, 0, 1);
+            stroke(lerpColor(color3, color4, lerpValue));
+            line(startingX, startingY + i, startingX + width, startingY + i);
+        } for (int i =3*height/6; i<4*height/6; i++) {
+            float lerpValue = map(i, 3*height/6, 4*height/6, 0, 1);
+            stroke(lerpColor(color4, color5, lerpValue));
+            line(startingX, startingY + i, startingX + width, startingY + i);
+        } for (int i =4*height/6; i<5*height/6; i++) {
+            float lerpValue = map(i, 4*height/6, 5*height/6, 0, 1);
+            stroke(lerpColor(color5, color6, lerpValue));
+            line(startingX, startingY + i, startingX + width, startingY + i);
+        } for (int i =5*height/6; i<height; i++) {
+            float lerpValue = map(i, 5*height/6, 6*height/6, 0, 1);
+            stroke(lerpColor(color6, color7, lerpValue));
+            line(startingX, startingY + i, startingX + width, startingY + i);
+        }
+    }
     // selecting my color OR detecting the pressing of buttons
     int mycolor = 0;
     public void mousePressed() {
