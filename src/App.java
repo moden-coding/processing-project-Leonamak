@@ -7,6 +7,7 @@ public class App extends PApplet {
     boolean opacity = false;
     int myopacity = 255;
     float i = 0;
+    int saveamount=0;
 
     public static void main(String[] args) {
         PApplet.main("App");
@@ -291,7 +292,8 @@ public class App extends PApplet {
     //save an image.
     public void keyPressed() {
         if (key == ' ') {
-            save("screenshot.png");
+            save(saveamount+"screenshot.png");
+            saveamount++;
         }
     }
 }
