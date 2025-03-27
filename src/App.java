@@ -51,48 +51,48 @@ public class App extends PApplet {
             textSize(30);
             text("select a color, and draw!", 350, 90);
         }
-        // Color Pallete!
+        // Color Pallete (non gradient)!
         //Red circle
         stroke(230, 230, 230);
         strokeWeight(2);
-        fill(200, 0, 0);
         int red = color(200,0,0);
+        fill(red);
         ellipse(75, 55, 60, 60);
         // orange circle
         stroke(230, 230, 230);
         strokeWeight(2);
-        fill(255, 159, 0);
         int orange = color(255,159,0);
+        fill(orange);
         ellipse(75, 135, 60, 60);
         // yellow circle
         stroke(230, 230, 230);
         strokeWeight(2);
-        fill(255, 240, 5);
         int yellow = color(255,240,5);
+        fill(yellow);
         ellipse(75, 135 + 80, 60, 60);
         // green circle
         stroke(230, 230, 230);
         strokeWeight(2);
-        fill(90, 220, 80);
         int green = color(90,220,80);
+        fill(green);
         ellipse(75, 135 + 160, 60, 60);
         // blue circle
         stroke(230, 230, 230);
         strokeWeight(2);
-        fill(144, 213, 255);
         int blue = color(144,213,255);
+        fill(blue);
         ellipse(75, 135 + 240, 60, 60);
         // purple-blue circle
         stroke(230, 230, 230);
         strokeWeight(2);
-        fill(120, 145, 240);
         int bluepurple = color(120,145,240);
+        fill(bluepurple);
         ellipse(75, 135 + 320, 60, 60);
         // indigo circle
         stroke(230, 230, 230);
         strokeWeight(2);
-        fill(150, 85, 230);
         int purple = color(150,85,230);
+        fill(purple);
         ellipse(75, 135 + 400, 60, 60);
         // pink circle
         stroke(230, 230, 230);
@@ -136,18 +136,21 @@ public class App extends PApplet {
         rect(890, 320, 75, 50);
         fill(0, 0, 0);
         textSize(16);
-        text("Brush Size", 1000 - 107, 350);
+        text("Change", 1000 - 98, 340);
+        textSize(16);
+        text("Brush Size", 1000 - 107, 360);
         // opacity change button
         fill(200, 200, 200);
         rect(890, 390, 75, 50);
         fill(0, 0, 0);
         textSize(20);
-        text("Opacity", 1000 - 104, 420);
+        text("Airbrush", 1000 - 107, 420);
         //drawing my pallete! i did use chatgpt to help me figure out each aspect of how you make a gradient,
         //and the rest i figured out myself. i had the idea to make a method instead of having so many
         //values just being reused a lot, and it made me understand it easier.
         drawPalleteWith7Colors(360, 75, 890, 460, red, orange, yellow, green, blue, bluepurple, purple);
     }
+
     //my method to create the rainbow pallette
     public void drawPalleteWith7Colors(int height, int width, int startingX, int startingY, int color1, int color2, int color3, int color4, int color5, int color6, int color7) {
         for (int i =0; i < height/6; i++) {
@@ -282,6 +285,13 @@ public class App extends PApplet {
             noStroke();
             fill(mycolor, myopacity);
             circle(mouseX, mouseY, brush);
+        }
+    }
+    //this part was pretty much written by chatgpt, because i asked it how to detect the spacebar and how to
+    //save an image.
+    public void keyPressed() {
+        if (key == ' ') {
+            save("screenshot.png");
         }
     }
 }
